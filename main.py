@@ -1,15 +1,16 @@
 import pypandoc
 
+import flask
 from flask import Flask
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return 'Hello World!'
+    return flask.render_template("upload.html")
 
-@app.route('/upload')
+@app.route('/upload', methods=['GET', 'POST'])
 def upload():
-    if request.method == 'POST':
+    if flask.request.method == 'POST':
         network_file = flask.request.files['file']
         stream = network_file.read()
         output = pypandoc.convert(stream, 'revealjs', format='md',
