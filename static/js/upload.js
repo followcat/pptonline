@@ -53,7 +53,7 @@
 				}
 			}, false);
 
-			xhr.addEventListener("load", function(response){
+			xhr.addEventListener("load", function(event){
 				if( (xhr.status >= 200 && xhr.status < 300) || xhr.status == 304 )
 				{
 					var successMsg = document.createElement('span');
@@ -61,9 +61,8 @@
 					successMsg.appendChild(text);
 					progressmsg.appendChild(successMsg);
 					func();
-					if(response == 'True'){
+					if(event.currentTarget.responseText == 'True'){
 						var link = document.createElement("a");
-						link.setAttribute("target", "_blank");
 						link.setAttribute("href", "/preview");
 						link.click();
 					}
